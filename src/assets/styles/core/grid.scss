@@ -1,0 +1,16 @@
+.grid {
+ display: flex;
+ flex-flow: row wrap;
+
+ .grid__item {
+
+ }
+
+ .one-whole {
+   flex-basis: 100%;
+ }
+
+ .medium--one-quarter {
+   flex-basis: 25%;
+ }
+}
