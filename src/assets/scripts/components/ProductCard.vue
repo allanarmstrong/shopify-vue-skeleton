@@ -5,14 +5,49 @@
   <h3>{{ product.title }}</h3>
   <p>{{product.price | formatMoney}}</p>
   </a>
+  <button v-on:click="addToCart(product.variants[0].id)">{{ addToCartText }}</button>
 </div>
 </template>
 
 <script>
+import $ from 'jquery';
 export default {
   name: 'ProductCard',
   props: {
     product: Object
+  },
+  data() {
+    return {
+      addToCartText: 'Add To Cart',
+    };
+  },
+  methods: {
+    postAddToCart() {
+      this.addToCartText = 'Added to Cart';
+      const self = this;
+      setTimeout(function() {
+        self.addToCartText = 'Add To Cart';
+      }, 1000);
+    },
+    addToCart(id) {
+      const self = this;
+      $.ajax({
+        url: '/cart/add.js',
+        data: {
+          id,
+          quantity: 1
+        },
+        method: 'POST',
+        dataType: 'json',
+        success: (response) => { 
+          console.log(response);
+          self.postAddToCart();
+        },
+        error: (response) => {
+          console.error(response);
+        }
+      })
+    }
   },
   filters: {
     formatMoney: function(cents) {

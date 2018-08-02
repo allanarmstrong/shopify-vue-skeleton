@@ -5,10 +5,5 @@ new Vue({
   el: '#collection',
   components: {Collection},
   template: '<Collection></Collection>',
-  data() {
-    return {
-      greetings: 'Hi',
-    };
-  },
 });
 
